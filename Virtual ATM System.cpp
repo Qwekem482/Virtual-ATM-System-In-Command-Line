@@ -18,8 +18,8 @@ int main() {
     User currentClient, databaseClient;
     short service = 0, num;
     string path;
-    int total = 0, banknote[6], atmData[7], mustMultiple, tempMoney = 0, pause;
-    int valueATMData[] = { 10000, 20000, 50000, 100000, 200000, 500000 };
+    int total = 0, banknote[6], mustMultiple, tempMoney = 0, pause;
+    DataOfATM atmData[7];
     //Begin of Login
     while (controlLoop == false) {
         cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
@@ -63,7 +63,7 @@ int main() {
             minMoneyCanWithdraw(atmData, &mustMultiple);
             checkMoneyWithdraw(&tempMoney, &mustMultiple, &controlLoop, &currentClient);
             if (controlLoop == false) continue;
-            greedyWithdraw(&tempMoney, &total, atmData, valueATMData, &controlLoop);
+            greedyWithdraw(&tempMoney, &total, atmData, &controlLoop);
             currentBalance(&currentClient, &total);
             writeATMData(atmData);
             reopenMenu(&controlLoop);

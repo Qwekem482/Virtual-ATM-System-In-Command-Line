@@ -3,9 +3,9 @@
 
 #include "../HeaderFile/user.hpp"
 
-void minMoneyCanWithdraw(int* atmData, int* mustMultiple);
+void minMoneyCanWithdraw(DataOfATM atmData[], int* mustMultiple);
 void checkMoneyWithdraw(int* tempMoney, int* mustMultiple, bool* controlLoop, User* currentClient);
-void greedyWithdraw(int*tempMoney, int* total, int atmData[], int valueATMData[], bool* controlLoop);
+void greedyWithdraw(int*tempMoney, int* total, DataOfATM atmData[], bool* controlLoop);
 
 
 #endif

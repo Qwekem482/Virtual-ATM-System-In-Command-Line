@@ -10,7 +10,7 @@ using namespace std;
 
 string convertTime(int time) {
     string timeString;
-    stringstream ss;
+    stringstream ss;                                        //convert from int to string
     ss << time;
     if (time < 10) {
         timeString = "0" + ss.str();
@@ -21,7 +21,7 @@ string convertTime(int time) {
 }
 
 string getTime() {
-   string historyTime;
+    string historyTime;
     time_t now = time(0);
     tm* localTime = localtime(&now);
     historyTime = convertTime(localTime->tm_hour) + ":" + convertTime(1 + localTime->tm_min) + ":" + convertTime(1 + localTime->tm_sec) + " ";
@@ -38,12 +38,12 @@ void checkDatabase(fstream* list) {
     }
 }
 
-void readATMData (int atmData[]) {
+void readATMData (DataOfATM atmData[]) {
     fstream atmMoney;
     atmMoney.open("Database/atmMoney.txt", fstream::in);
     checkDatabase(&atmMoney);
     for (int i = 0; i <= 6; i++) {
-        atmMoney >> atmData[i];
+        atmMoney >> atmData[i].denomination >> atmData[i].money;
     }
     atmMoney.close();
 }
@@ -77,11 +77,11 @@ void currentBalance (User* currentClient, int* total) {
     accountInfo.close();
 }
 
-void writeATMData(int atmData[]) {
+void writeATMData(DataOfATM atmData[]) {
     fstream atmMoney;
     atmMoney.open("Database/atmMoney.txt", fstream::trunc | fstream::out);
     checkDatabase(&atmMoney);
-    for (int i = 0; i <= 6; i++) atmMoney << atmData[i] << endl;
+    for (int i = 0; i <= 6; i++) atmMoney << atmData[i].denomination << " " << atmData[i].money << endl;
     atmMoney.close();
 }
 
