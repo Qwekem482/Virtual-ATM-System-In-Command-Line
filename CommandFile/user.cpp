@@ -86,25 +86,23 @@ void writeATMData(DataOfATM atmData[]) {
 }
 
 void reopenMenu(bool* controlLoop) {
-    char c;
-    cout << "Thanks for using our service. If you want to..." << endl;
+    string c;
+    cout << "Thanks for using our service. If you really want to..." << endl;
     cout << "End this session           press 1" << endl;
     cout << "Continue this session      press 2" << endl;
-    cout << "Your choice: ";
-    cin >> c;
     while (true) {
-        if (c == '1') {
+        cout << "Your choice: ";
+        cin >> c;
+        if (c == "1") {
             *controlLoop = false;
             break;
         }
-        else if (c == '2') {
+        else if (c == "2") {
             *controlLoop = true;
             break;
         }
         else {
             cout << "Can't recognize your input, please try again." << endl;
-            cout << "Your choice: ";
-            cin >> c;
         }
     }
 }
