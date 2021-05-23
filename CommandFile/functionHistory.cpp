@@ -12,6 +12,7 @@ void getHistory(User* currentClient) {
     fstream historyFile;
     historyFile.open(path, fstream::in);
     checkDatabase(&historyFile);
+    cout << endl << "********* Your Account History ********" << endl;
     while (!historyFile.eof()) {
         getline(historyFile, content);
         cout << content << endl;

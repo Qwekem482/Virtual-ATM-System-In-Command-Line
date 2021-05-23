@@ -45,7 +45,7 @@ void checkAvailable(User* databaseClient, User* currentClient, bool* controlLoop
         }
     }
     if (*controlLoop == false) {
-        cout << "The ID is incorrect, please try again." << endl;
+        cout << endl << "The ID is incorrect, please try again." << endl;
     }
     loginList.close();
 }
@@ -57,7 +57,7 @@ void checkLockList(User* databaseClient, User* currentClient, bool* controlLoop)
     while (!lockList.eof()) {
         lockList >> databaseClient->ID;
         if(checkID(databaseClient, currentClient)) {
-            cout << "This Account is locked" << endl;
+            cout << endl << "This Account is locked, please try again." << endl;
             *controlLoop = false;
             break;
         }
@@ -82,10 +82,11 @@ void checkMatchIDPass(User* databaseClient, User* currentClient, bool* controlLo
         }
         if (*controlLoop == true) break;
         if (i < 4) {
-            cout << "The Password is incorrect, please try again." << endl;
+            cout << endl << "The Password is incorrect, please try again." << endl;
+            cout << endl << "Welcome" << endl << "Please log in to continue." << endl;
             input(currentClient);
         } else {
-            cerr << "Your Account will be locked because you tried too many times." << endl;
+            cout << endl << "Your Account will be locked because you tried too many times." << endl;
             insertLock(currentClient);
             *controlLoop = false;
         }

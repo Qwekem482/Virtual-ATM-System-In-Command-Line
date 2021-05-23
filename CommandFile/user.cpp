@@ -32,7 +32,7 @@ string getTime() {
 void checkDatabase(fstream* list) {
     if (list->is_open() == false) {
         char pause;
-        cout << "Critical Error: Database badly damaged, press any key to continue" << endl;
+        cout << endl << "Critical Error: Database badly damaged, press any key to continue" << endl;
         cin >> pause;
         exit(EXIT_FAILURE);
     }
@@ -53,7 +53,7 @@ void openAccount (User* currentClient) {
     fstream account;
     account.open(path, fstream::in);
     account >> currentClient->money;
-    cout << "Your account balance: " << currentClient->money << endl;
+    cout << endl << "Your account balance: " << currentClient->money << endl;
     account.close();
 }
 
@@ -61,7 +61,7 @@ void currentBalance (User* currentClient, int* total) {
     string pathHistory = "Database/" + currentClient->ID + "_History.txt";
     string pathInfo = "Database/" + currentClient->ID + ".txt";
     currentClient->money = currentClient->money + *total;
-    cout << "Your account balance: " << currentClient->money << endl;
+    cout << endl << "Your account balance: " << currentClient->money << endl;
     fstream history, accountInfo;
     history.open(pathHistory, fstream::out | fstream::app);
     checkDatabase(&history);
@@ -87,7 +87,7 @@ void writeATMData(DataOfATM atmData[]) {
 
 void reopenMenu(bool* controlLoop) {
     string c;
-    cout << "Thanks for using our service. If you really want to..." << endl;
+    cout << endl << "Thanks for using our service. If you really want to..." << endl;
     cout << "End this session           press 1" << endl;
     cout << "Continue this session      press 2" << endl;
     while (true) {
@@ -99,6 +99,7 @@ void reopenMenu(bool* controlLoop) {
         }
         else if (c == "2") {
             *controlLoop = true;
+            cout << endl;
             break;
         }
         else {

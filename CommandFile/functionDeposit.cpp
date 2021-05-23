@@ -13,7 +13,7 @@ void receiveDepositData(int banknote[], DataOfATM atmData[], int i) {
 
 void deposit(int banknote[], DataOfATM atmData[], int* total) {
     *total = 0;
-    cout << "How much do you want to deposit:" << endl;
+    cout << endl << "How much do you want to deposit:" << endl;
     for (int i = 0; i <= 5; i++) {
         cout << atmData[i].denomination << "VND:        ";
         receiveDepositData(banknote, atmData, i);

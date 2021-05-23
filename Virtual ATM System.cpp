@@ -21,15 +21,23 @@ int main() {
     DataOfATM atmData[7];
     //Begin of Login
     while (controlLoop == false) {
-        cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
         cout << "Welcome" << endl << "Please log in to continue." << endl;
         input(&currentClient);
         checkAvailable(&databaseClient, &currentClient, &controlLoop);
-        if (controlLoop == false) continue;
+        if (controlLoop == false) {
+            cout << endl;
+            continue;
+        }
         checkLockList(&databaseClient, &currentClient, &controlLoop);
-        if (controlLoop == false) continue;
+        if (controlLoop == false) {
+            cout << endl;
+            continue;
+        }
         checkMatchIDPass(&databaseClient, &currentClient, &controlLoop);
-        if (controlLoop == false) continue;
+        if (controlLoop == false) {
+            cout << endl;
+            continue;
+        }
     }
     //End of Login
     //Begin of Menu
@@ -46,7 +54,7 @@ int main() {
         cout << "Your choice: ";
         cin >> servicestr;
         if ((servicestr != "1" && servicestr != "2") && (servicestr != "3" && servicestr != "4") && servicestr != "5") {
-            cout << "Can't recognize your input, please try again." << endl;
+            cout << "Can't recognize your input, please try again." << endl << endl;
         }
         if (servicestr == "1") {
             readATMData(atmData);
@@ -55,6 +63,7 @@ int main() {
             currentBalance(&currentClient, &total);
             writeATMData(atmData);
             reopenMenu(&controlLoop);
+            cout << endl;
         }
         if (servicestr == "2") {
             readATMData(atmData);
@@ -66,18 +75,22 @@ int main() {
             currentBalance(&currentClient, &total);
             writeATMData(atmData);
             reopenMenu(&controlLoop);
+            cout << endl;
         }
         if (servicestr == "3") {
             openAccount(&currentClient);
             getHistory(&currentClient);
             reopenMenu(&controlLoop);
+            cout << endl;
         }
         if (servicestr == "4") {
             openAccount(&currentClient);
             reopenMenu(&controlLoop);
+            cout << endl;
         }
         if (servicestr == "5") {
             reopenMenu(&controlLoop);
+            cout << endl;
         }
 //End of fixs
     }
