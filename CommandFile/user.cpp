@@ -105,4 +105,5 @@ void reopenMenu(bool* controlLoop) {
             cout << "Can't recognize your input, please try again." << endl;
         }
     }
+
 }
