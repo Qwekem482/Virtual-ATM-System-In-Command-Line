@@ -36,12 +36,10 @@ void checkMoneyWithdraw(int* tempMoney, int* mustMultiple, bool* controlLoop, Us
         } else {
             cout << "The amount must be a multiple of " << *mustMultiple << endl;
             reopenMenu(controlLoop);
-            continue;
         }
         if (currentClient->money < *tempMoney) {
             cout << "Insufficient account balance";
             reopenMenu(controlLoop);
-            continue;
         }
     }
 }
