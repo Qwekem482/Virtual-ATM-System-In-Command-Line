@@ -16,9 +16,8 @@ int main() {
     //Variable
     bool controlLoop = false;
     User currentClient, databaseClient;
-    short service = 0, num;
     string path, servicestr;
-    int total = 0, banknote[6], mustMultiple, tempMoney = 0, pause;
+    int total = 0, banknote[6], mustMultiple, tempMoney = 0;
     DataOfATM atmData[7];
     //Begin of Login
     while (controlLoop == false) {
