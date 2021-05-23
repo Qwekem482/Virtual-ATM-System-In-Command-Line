@@ -17,7 +17,7 @@ int main() {
     bool controlLoop = false;
     User currentClient, databaseClient;
     short service = 0, num;
-    string path;
+    string path, servicestr;
     int total = 0, banknote[6], mustMultiple, tempMoney = 0, pause;
     DataOfATM atmData[7];
     //Begin of Login
@@ -34,30 +34,30 @@ int main() {
     }
     //End of Login
     //Begin of Menu
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+    cout << "Welcome, " << currentClient.ID << ". Thanks for using our Virtual ATM System" << endl;
+    cout << "This is the #890996 ATM. ";
     while (controlLoop == true) {
-        cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-        cout << "Welcome, " << currentClient.ID << ". Thanks for using our Virtual ATM System" << endl;
-        cout << "This is the #890996 ATM, what service do you want to use?" << endl;
+        cout << "What service do you want to use?" << endl;
         cout << "To deposit your money          press 1" << endl;
         cout << "To withdraw your money         press 2" << endl;
         cout << "To see your account history    press 3" << endl;
-        cout << "To end this session            press 4" << endl;
+        cout << "To see your current balance    press 4" << endl;
+        cout << "To end this session            press 5" << endl;
         cout << "Your choice: ";
-        cin >> service;
-        switch (service) {
-            //Begin of Deposit
-        case 1:
+        cin >> servicestr;
+        if ((servicestr != "1" && servicestr != "2") && (servicestr != "3" && servicestr != "4") && servicestr != "5") {
+            cout << "Can't recognize your input, please try again." << endl;
+        }
+        if (servicestr == "1") {
             readATMData(atmData);
             openAccount(&currentClient);
             deposit(banknote, atmData, &total);
             currentBalance(&currentClient, &total);
             writeATMData(atmData);
             reopenMenu(&controlLoop);
-            if (controlLoop == false) continue;
-            break;
-            //End of Deposit
-            //Begin of Withdraw
-        case 2:
+        }
+        if (servicestr == "2") {
             readATMData(atmData);
             openAccount(&currentClient);
             minMoneyCanWithdraw(atmData, &mustMultiple);
@@ -67,26 +67,20 @@ int main() {
             currentBalance(&currentClient, &total);
             writeATMData(atmData);
             reopenMenu(&controlLoop);
-            if (controlLoop == false) continue;
-            break;
-            //End of Withdraw
-            //Begin of History
-        case 3:
+        }
+        if (servicestr == "3") {
             openAccount(&currentClient);
             getHistory(&currentClient);
-            if (controlLoop == false) continue;
             reopenMenu(&controlLoop);
-            break;
-            //End of History
-            //Begin of End
-        case 4:
-            reopenMenu(&controlLoop);
-            break;
-            //End of End
-        default:
-            cout << "Can't recognize your input, please try again." << endl;
-            break;
         }
+        if (servicestr == "4") {
+            openAccount(&currentClient);
+            reopenMenu(&controlLoop);
+        }
+        if (servicestr == "5") {
+            reopenMenu(&controlLoop);
+        }
+//End of fixs
     }
     //End of Menu
     //Begin of Credit
