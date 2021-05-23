@@ -41,7 +41,7 @@ int main() {
     }
     //End of Login
     //Begin of Menu
-    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+    cout << endl;
     cout << "Welcome, " << currentClient.ID << ". Thanks for using our Virtual ATM System" << endl;
     cout << "This is the #890996 ATM. ";
     while (controlLoop == true) {
