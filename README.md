@@ -6,3 +6,4 @@ Function:
   + Deposit
   + Withdraw
   + Check History
+  + Check Account balance
