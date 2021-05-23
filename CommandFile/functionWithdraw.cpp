@@ -39,6 +39,7 @@ void checkMoneyWithdraw(int* tempMoney, int* mustMultiple, bool* controlLoop, Us
             cout << endl << "Insufficient account balance" << endl;
             reopenMenu(controlLoop);
         }
+        break;
     }
 }
 
