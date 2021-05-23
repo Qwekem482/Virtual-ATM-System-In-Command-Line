@@ -7,22 +7,22 @@ using namespace std;
 
 void minMoneyCanWithdraw(DataOfATM atmData[], int* mustMultiple) {
     if(atmData[0].money != 0) {
-        cout << "The amount withdrawn must be a multiple of 10000 VND" << endl;
+        cout << endl << "The amount withdrawn must be a multiple of 10000 VND" << endl;
         *mustMultiple = 10000;
     } else if(atmData[1].money != 0) {
-        cout << "The amount withdrawn must be a multiple of 20000 VND" << endl;
+        cout << endl << "The amount withdrawn must be a multiple of 20000 VND" << endl;
         *mustMultiple = 20000;
     } else if(atmData[2].money != 0) {
-        cout << "The amount withdrawn must be a multiple of 50000 VND" << endl;
+        cout << endl << "The amount withdrawn must be a multiple of 50000 VND" << endl;
         *mustMultiple = 50000;
     } else if(atmData[3].money != 0) {
-        cout << "The amount withdrawn must be a multiple of 100000 VND" << endl;
+        cout << endl << "The amount withdrawn must be a multiple of 100000 VND" << endl;
         *mustMultiple = 100000;
     } else if(atmData[4].money != 0) {
-        cout << "The amount withdrawn must be a multiple of 200000 VND" << endl;
+        cout << endl << "The amount withdrawn must be a multiple of 200000 VND" << endl;
         *mustMultiple = 200000;
     } else if(atmData[5].money != 0) {
-        cout << "The amount withdrawn must be a multiple of 500000 VND" << endl;
+        cout << endl << "The amount withdrawn must be a multiple of 500000 VND" << endl;
         *mustMultiple = 500000;
     }
 }
@@ -31,14 +31,12 @@ void checkMoneyWithdraw(int* tempMoney, int* mustMultiple, bool* controlLoop, Us
     while (*controlLoop == true) {
         cout << "Please enter the amount you want to withdraw: ";
         cin >> *tempMoney;
-        if (*tempMoney % *mustMultiple == 0) {
-            break;
-        } else {
-            cout << "The amount must be a multiple of " << *mustMultiple << endl;
+        if (*tempMoney % *mustMultiple != 0|| *tempMoney == 0) {
+            cout << endl << "The withdrawn amount must be a multiple of " << *mustMultiple << " VND" << endl;
             reopenMenu(controlLoop);
         }
-        if (currentClient->money < *tempMoney) {
-            cout << "Insufficient account balance";
+        if (currentClient->money - *tempMoney < 0) {
+            cout << endl << "Insufficient account balance" << endl;
             reopenMenu(controlLoop);
         }
     }
@@ -58,10 +56,10 @@ void greedyWithdraw(int*tempMoney, int* total, DataOfATM atmData[], bool* contro
     }
     
     if (*total < *tempMoney) {
-        cout << "#890996 can't offer this amount. Sorry for the inconvenience, please try again" << endl;
+        cout << endl << "#890996 can't offer this amount. Sorry for the inconvenience, please try again" << endl;
         *total = 0;
     } else {
-        cout << "You receive: " << endl;
+        cout << endl << "You receive: " << endl;
         for (int i = 0; i < 6; i++) {
             if (i < 3) cout << atmData[i].denomination << "  VND          x" << banknoteWithdraw[i] << endl;
             else cout << atmData[i].denomination << " VND          x" << banknoteWithdraw[i] << endl;
