@@ -84,14 +84,12 @@ int main() {
             break;
             //End of End
         default:
-            cout << "Can't recognize your input, press any key to continue." << endl;
-            cin.get();
+            cout << "Can't recognize your input, please try again." << endl;
             break;
         }
     }
     //End of Menu
     //Begin of Credit
-    cout << "Thanks for using our service" << endl << "Please rate us 5/5 stars in your heart <3";
     return 0;
     //End of Credit
 }
