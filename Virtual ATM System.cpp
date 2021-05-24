@@ -25,23 +25,20 @@ int main() {
         input(&currentClient);
         checkAvailable(&databaseClient, &currentClient, &controlLoop);
         if (controlLoop == false) {
-            cout << endl;
             continue;
         }
         checkLockList(&databaseClient, &currentClient, &controlLoop);
         if (controlLoop == false) {
-            cout << endl;
             continue;
         }
         checkMatchIDPass(&databaseClient, &currentClient, &controlLoop);
         if (controlLoop == false) {
-            cout << endl;
             continue;
         }
     }
+    system("cls");
     //End of Login
     //Begin of Menu
-    cout << endl;
     cout << "Welcome, " << currentClient.ID << ". Thanks for using our Virtual ATM System" << endl;
     cout << "This is the #890996 ATM. ";
     while (controlLoop == true) {
@@ -53,6 +50,7 @@ int main() {
         cout << "To end this session            press 5" << endl;
         cout << "Your choice: ";
         cin >> servicestr;
+        system("cls");
         if ((servicestr != "1" && servicestr != "2") && (servicestr != "3" && servicestr != "4") && servicestr != "5") {
             cout << "Can't recognize your input, please try again." << endl << endl;
         }
@@ -63,7 +61,6 @@ int main() {
             currentBalance(&currentClient, &total);
             writeATMData(atmData);
             reopenMenu(&controlLoop);
-            cout << endl;
         }
         if (servicestr == "2") {
             readATMData(atmData);
@@ -75,24 +72,19 @@ int main() {
             currentBalance(&currentClient, &total);
             writeATMData(atmData);
             reopenMenu(&controlLoop);
-            cout << endl;
         }
         if (servicestr == "3") {
             openAccount(&currentClient);
             getHistory(&currentClient);
             reopenMenu(&controlLoop);
-            cout << endl;
         }
         if (servicestr == "4") {
             openAccount(&currentClient);
             reopenMenu(&controlLoop);
-            cout << endl;
         }
         if (servicestr == "5") {
             reopenMenu(&controlLoop);
-            cout << endl;
         }
-//End of fixs
     }
     //End of Menu
     //Begin of Credit
