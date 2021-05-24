@@ -33,13 +33,15 @@ void checkMoneyWithdraw(int* tempMoney, int* mustMultiple, bool* controlLoop, Us
         cin >> *tempMoney;
         if (*tempMoney % *mustMultiple != 0|| *tempMoney == 0) {
             cout << endl << "The withdrawn amount must be a multiple of " << *mustMultiple << " VND" << endl;
+            *tempMoney = 0;
             reopenMenu(controlLoop);
         }
         if (currentClient->money - *tempMoney < 0) {
             cout << endl << "Insufficient account balance" << endl;
+            *tempMoney = 0;
             reopenMenu(controlLoop);
         }
-        break;
+        if (*tempMoney != 0) break;
     }
 }
 
@@ -57,7 +59,7 @@ void greedyWithdraw(int*tempMoney, int* total, DataOfATM atmData[], bool* contro
     }
     
     if (*total < *tempMoney) {
-        cout << endl << "#890996 can't offer this amount. Sorry for the inconvenience, please try again" << endl;
+        cout << endl << "#890996 can't offer this amount. Sorry for the inconvenience, please try again later." << endl;
         *total = 0;
     } else {
         cout << endl << "You receive: " << endl;
