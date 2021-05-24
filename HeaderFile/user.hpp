@@ -7,6 +7,7 @@ struct User {
     std::string ID;
     std::string pass;
     int money;
+    int loginTime;
 };
 
 struct DataOfATM {

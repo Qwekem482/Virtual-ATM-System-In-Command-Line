@@ -32,8 +32,8 @@ string getTime() {
 void checkDatabase(fstream* list) {
     if (list->is_open() == false) {
         char pause;
-        cout << endl << "Critical Error: Database badly damaged, press any key to continue" << endl;
-        cin >> pause;
+        cout << endl << "Critical Error: Database badly damaged." << endl;
+        system("pause");
         exit(EXIT_FAILURE);
     }
 }
@@ -99,7 +99,7 @@ void reopenMenu(bool* controlLoop) {
         }
         else if (c == "2") {
             *controlLoop = true;
-            cout << endl;
+            system("cls");
             break;
         }
         else {

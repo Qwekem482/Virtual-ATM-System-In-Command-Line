@@ -23,13 +23,6 @@ void input(User* currentClient) {
     cin >> currentClient->pass;
 }
 
-void insertLock(User* currentClient) {
-    fstream lockList;
-    lockList.open("Database/lockAccount.txt", fstream::out | fstream::app);
-    checkDatabase(&lockList);
-    lockList << endl << currentClient->ID;
-    lockList.close();
-}
 
 void checkAvailable(User* databaseClient, User* currentClient, bool* controlLoop) {
     fstream loginList;
@@ -45,35 +38,47 @@ void checkAvailable(User* databaseClient, User* currentClient, bool* controlLoop
         }
     }
     if (*controlLoop == false) {
-        cout << endl << "The ID is incorrect, please try again." << endl;
+        cout << endl << "The ID is incorrect. ";
+        system("pause");
+        system("cls");
     }
     loginList.close();
 }
 
 void checkLockList(User* databaseClient, User* currentClient, bool* controlLoop) {
-    fstream lockList;
-    lockList.open("Database/lockAccount.txt", fstream::in);
-    checkDatabase(&lockList);
-    while (!lockList.eof()) {
-        lockList >> databaseClient->ID;
-        if(checkID(databaseClient, currentClient)) {
-            cout << endl << "This Account is locked, please try again." << endl;
-            *controlLoop = false;
-            break;
-        }
+    string path = "Database/" + currentClient->ID + "_lockTime.txt";
+    fstream loginTime;
+    loginTime.open(path, fstream::in);
+    checkDatabase(&loginTime);
+    loginTime >> currentClient->loginTime;
+    loginTime.close();
+    if(currentClient->loginTime >= 5) {
+        cout << endl << "This Account is locked. ";
+        *controlLoop = false;
+        system("pause");
+        system("cls");
     }
-    lockList.close();
 }
 
 void checkMatchIDPass(User* databaseClient, User* currentClient, bool* controlLoop) {
-    fstream loginList;
+    string path = "Database/" + currentClient->ID + "_lockTime.txt";
+    fstream loginList, loginTime;
+    loginTime.open(path, fstream::in);
+    checkDatabase(&loginTime);
+    loginTime >> currentClient->loginTime;
+    loginTime.close();
     loginList.open("Database/Account.txt", fstream::in);
     checkDatabase(&loginList);
-    for (int i = 0; i < 5; i++) {
-        while(!loginList.eof()) {
+    while (true) {
+        while (!loginList.eof()) {
             loginList >> databaseClient->ID >> databaseClient->pass;
-            if(checkPass(databaseClient, currentClient)) {
+            if (checkPass(databaseClient, currentClient)) {
                 *controlLoop = true;
+                currentClient->loginTime = 0;
+                loginTime.open(path, fstream::trunc | fstream::out);
+                checkDatabase(&loginTime);
+                loginTime << currentClient->loginTime;
+                loginTime.close();
                 break;
             }
             else {
@@ -81,15 +86,27 @@ void checkMatchIDPass(User* databaseClient, User* currentClient, bool* controlLo
             }
         }
         if (*controlLoop == true) break;
-        if (i < 4) {
-            cout << endl << "The Password is incorrect, please try again." << endl;
-            cout << endl << "Welcome" << endl << "Please log in to continue." << endl;
-            input(currentClient);
-        } else {
-            cout << endl << "Your Account will be locked because you tried too many times." << endl;
-            insertLock(currentClient);
-            *controlLoop = false;
+        else {
+            currentClient->loginTime = currentClient->loginTime + 1;
+            loginTime.open(path, fstream::trunc | fstream::out);
+            checkDatabase(&loginTime);
+            loginTime << currentClient->loginTime;
+            loginTime.close();
         }
+        if (currentClient->loginTime < 5) {
+            cout << endl << "The Password is incorrect. ";
+            system("pause");
+            system("cls");
+            cout << "Welcome" << endl << "Please log in to continue." << endl;
+            input(currentClient);
+        }
+        else {
+            cout << endl << "This Account will be locked because you tried too many times. ";
+            system("pause");
+            system("cls");
+            *controlLoop = false;
+            break;
+        }
+        loginList.close();
     }
-    loginList.close();
 }
